@@ -1,10 +1,10 @@
 locals {
-  api_mgmt_name     = join("-", ["api-gateway", var.env])
-  api_mgmt_rg       = join("-", ["core-infra", var.env])
+  api_mgmt_name     = join("-", ["cft-api-mgmt", var.env])
+  api_mgmt_rg       = join("-", ["cft", var.env,"network-rg"])
   fis_key_vault = join("-", ["fis", var.env])
-  api_base_path     = "fis-api-gateway"
+  api_base_path     = "prl-case-api"
 
-  family_api_url = join("", ["http://fis-api-", var.env, ".service.core-compute-", var.env, ".internal"])
+  prl_api_url = join("", ["http://prl-api-", var.env, ".service.core-compute-", var.env, ".internal"])
   s2sUrl           = join("", ["http://rpe-service-auth-provider-", var.env, ".service.core-compute-", var.env, ".internal"])
 
   # list of the thumbprints of the SSL certificates that should be accepted by the API (gateway)
@@ -42,7 +42,7 @@ module "api_mgmt_api" {
   api_mgmt_rg   = local.api_mgmt_rg
   product_id    = module.api_mgmt_product.product_id
   path          = local.api_base_path
-  service_url   = local.family_api_url
+  service_url   = local.prl_api_url
   //Todo change the json
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/ccpay-payment-app.recon-payments.json"
   revision      = "1"
