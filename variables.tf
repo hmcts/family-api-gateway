@@ -4,7 +4,7 @@ variable "product" {
 
 variable "product_name" {
   type    = string
-  default = "payments"
+  default = "fis"
 }
 
 variable "location" {

@@ -2,7 +2,7 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-withInfraPipeline('paymentsgw') {
+withInfraPipeline('familygw') {
     // Configure branches to sync with master branch
     def branchesToSync = ['demo', 'ithc', 'perftest']
 

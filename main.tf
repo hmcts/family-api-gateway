@@ -1,10 +1,10 @@
 locals {
-  api_mgmt_name     = join("-", ["core-api-mgmt", var.env])
+  api_mgmt_name     = join("-", ["api-gateway", var.env])
   api_mgmt_rg       = join("-", ["core-infra", var.env])
-  payment_key_vault = join("-", ["ccpay", var.env])
-  api_base_path     = "payments-api"
+  fis_key_vault = join("-", ["fis", var.env])
+  api_base_path     = "fis-api-gateway"
 
-  payments_api_url = join("", ["http://payment-api-", var.env, ".service.core-compute-", var.env, ".internal"])
+  family_api_url = join("", ["http://fis-api-", var.env, ".service.core-compute-", var.env, ".internal"])
   s2sUrl           = join("", ["http://rpe-service-auth-provider-", var.env, ".service.core-compute-", var.env, ".internal"])
 
   # list of the thumbprints of the SSL certificates that should be accepted by the API (gateway)
@@ -12,19 +12,19 @@ locals {
   thumbprints_in_quotes_str = join(",", local.thumbprints_in_quotes)
 }
 
-data "azurerm_key_vault" "payment_key_vault" {
-  name                = local.payment_key_vault
-  resource_group_name = local.payment_key_vault
+data "azurerm_key_vault" "fis_key_vault" {
+  name                = local.fis_key_vault
+  resource_group_name = local.fis_key_vault
 }
 
 data "azurerm_key_vault_secret" "s2s_client_secret" {
   name         = "gateway-s2s-client-secret"
-  key_vault_id = data.azurerm_key_vault.payment_key_vault.id
+  key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
 
 data "azurerm_key_vault_secret" "s2s_client_id" {
   name         = "gateway-s2s-client-id"
-  key_vault_id = data.azurerm_key_vault.payment_key_vault.id
+  key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
 
 module "api_mgmt_product" {
@@ -37,12 +37,13 @@ module "api_mgmt_product" {
 module "api_mgmt_api" {
   source        = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
   name          = join("-", [var.product_name, "api"])
-  display_name  = "Payments API"
+  display_name  = "Family API"
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
   product_id    = module.api_mgmt_product.product_id
   path          = local.api_base_path
-  service_url   = local.payments_api_url
+  service_url   = local.family_api_url
+  //Todo change the json
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/ccpay-payment-app.recon-payments.json"
   revision      = "1"
 }
