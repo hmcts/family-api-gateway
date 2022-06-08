@@ -2,7 +2,6 @@ locals {
   api_mgmt_name     = join("-", ["cft-api-mgmt", var.env])
   api_mgmt_rg       = join("-", ["cft", var.env,"network-rg"])
   fis_key_vault = join("-", ["fis", var.env])
-  api_base_path     = "prl-case-api"
 
   prl_api_url = join("", ["http://prl-cos-", var.env, ".service.core-compute-", var.env, ".internal"])
   s2sUrl           = join("", ["http://rpe-service-auth-provider-", var.env, ".service.core-compute-", var.env, ".internal"])
