@@ -7,77 +7,76 @@ module "prl-courtnav-product" {
   product_access_control_groups = ["developers"]
 }
 
-module "ccpay-refund-lists-api" {
+module "prl-courtnav-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
   api_mgmt_name = local.api_mgmt_name_cft
   api_mgmt_rg   = local.api_mgmt_rg_cft
   revision      = "1"
-  service_url   = local.refunds_api_url
-  product_id    = module.ccpay-refund-lists-product.product_id
+  service_url   = local.prl_api_url
+  product_id    = module.prl-courtnav-product.product_id
   name          = join("-", [var.product_name, "api"])
-  display_name  = "Refund List API"
-  path          = "refunds-api"
+  display_name  = "Court Nav Api"
+  path          = "prl-case-api"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/ccpay-payment-app.list-status.json"
 }
 
-data "template_file" "refund_lists_policy_template" {
+data "template_file" "courtnav_policy_template" {
   template = file(join("", [path.module, "/template/api-policy.xml"]))
 
   vars = {
-    allowed_certificate_thumbprints = local.refund_status_thumbprints_in_quotes_str
     s2s_client_id                   = data.azurerm_key_vault_secret.s2s_client_id.value
     s2s_client_secret               = data.azurerm_key_vault_secret.s2s_client_secret.value
     s2s_base_url                    = local.s2sUrl
   }
 }
 
-module "ccpay-refund-lists-policy" {
+module "prl-courtnav-policy" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
 
   api_mgmt_name = local.api_mgmt_name_cft
   api_mgmt_rg   = local.api_mgmt_rg_cft
 
-  api_name               = module.ccpay-refund-lists-api.name
-  api_policy_xml_content = data.template_file.refund_status_policy_template.rendered
+  api_name               = module.prl-courtnav-api.name
+  //api_policy_xml_content = data.template_file.refund_status_policy_template.rendered
 }
 
 
 
-data "azurerm_api_management_user" "refund_lists" {
+data "azurerm_api_management_user" "courtnav" {
   api_management_name = local.api_mgmt_name_cft
   resource_group_name   = local.api_mgmt_rg_cft
-  user_id             = "5931a75ae4bbd512288c680br"
+  user_id             = "*********"
 }
 
-data "azurerm_api_management" "refund_lists" {
+data "azurerm_api_management" "courtnav" {
   name                = var.product_name
   resource_group_name = local.api_mgmt_rg_cft
 }
 
-data "azurerm_api_management_product" "refund_lists" {
-  product_id          = module.ccpay-refund-lists-product.product_id
-  api_management_name = data.azurerm_api_management.refund_lists.name
-  resource_group_name = data.azurerm_api_management.refund_lists.resource_group_name
+data "azurerm_api_management_product" "courtnav" {
+  product_id          = module.prl-courtnav-product.product_id
+  api_management_name = data.azurerm_api_management.courtnav.name
+  resource_group_name = data.azurerm_api_management.courtnav.resource_group_name
 }
 
 
 
-resource "azurerm_api_management_subscription" "refund_lists_subscription" {
+resource "azurerm_api_management_subscription" "courtnav_subscription" {
   api_management_name = local.api_mgmt_name_cft
   resource_group_name   = local.api_mgmt_rg_cft
-  user_id             = data.azurerm_api_management_user.refund_lists.id
-  product_id          = data.azurerm_api_management_product.refund_lists.id
-  display_name        = "Refund List Subscription"
+  user_id             = data.azurerm_api_management_user.courtnav.id
+  product_id          = data.azurerm_api_management_product.courtnav.id
+  display_name        = "Courtnav Subscription"
   state               = "active"
 }
 
-resource "azurerm_api_management_user" "refund_lists" {
-  user_id             = "5931a75ae4bbd512288c680br"
+resource "azurerm_api_management_user" "courtnav" {
+  user_id             = "*******"
   api_management_name = local.api_mgmt_name_cft
   resource_group_name   = local.api_mgmt_rg_cft
-  first_name          = "Anshika"
-  last_name           = "Nigam"
-  email               = "anshika.nigam@hmcts.net"
+  first_name          = "*******"
+  last_name           = "*******"
+  email               = "*******"
   state               = "active"
 }
