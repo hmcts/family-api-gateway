@@ -18,7 +18,7 @@ module "prl-courtnav-api" {
   name          = join("-", [var.product_name, "api"])
   display_name  = "Court Nav Api"
   path          = "prl-case-api"
-  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/ccpay-payment-app.list-status.json"
+  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/court_nav.json"
 }
 
 data "template_file" "courtnav_policy_template" {
