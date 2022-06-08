@@ -41,14 +41,6 @@ module "prl-courtnav-policy" {
   //api_policy_xml_content = data.template_file.refund_status_policy_template.rendered
 }
 
-
-
-data "azurerm_api_management_user" "courtnav" {
-  api_management_name = local.api_mgmt_name_cft
-  resource_group_name   = local.api_mgmt_rg_cft
-  user_id             = "*********"
-}
-
 data "azurerm_api_management" "courtnav" {
   name                = var.product_name
   resource_group_name = local.api_mgmt_rg_cft
@@ -60,23 +52,3 @@ data "azurerm_api_management_product" "courtnav" {
   resource_group_name = data.azurerm_api_management.courtnav.resource_group_name
 }
 
-
-
-resource "azurerm_api_management_subscription" "courtnav_subscription" {
-  api_management_name = local.api_mgmt_name_cft
-  resource_group_name   = local.api_mgmt_rg_cft
-  user_id             = data.azurerm_api_management_user.courtnav.id
-  product_id          = data.azurerm_api_management_product.courtnav.id
-  display_name        = "Courtnav Subscription"
-  state               = "active"
-}
-
-resource "azurerm_api_management_user" "courtnav" {
-  user_id             = "*******"
-  api_management_name = local.api_mgmt_name_cft
-  resource_group_name   = local.api_mgmt_rg_cft
-  first_name          = "*******"
-  last_name           = "*******"
-  email               = "*******"
-  state               = "active"
-}
