@@ -16,6 +16,6 @@ withPipeline(type, product, component) {
   disableLegacyDeployment()
 
   after('checkout') {
-    echo 'prl-cos-api checked out'
+    echo 'family-api-gateway checked out'
   }
 }
