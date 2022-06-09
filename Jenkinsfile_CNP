@@ -1,11 +1,21 @@
 #!groovy
-//noinspection GroovyUnusedAssignment
-@Library("Infrastructure") _
+import uk.gov.hmcts.contino.AppPipelineDsl
 
-withInfraPipeline('familygw') {
-    // Configure branches to sync with master branch
-    def branchesToSync = ['demo', 'ithc', 'perftest']
+@Library("Infrastructure")
 
-    // Sync demo and perftest with master branch
-    syncBranchesWithMaster(branchesToSync)
+def type = "java"
+def product = "fis"
+def component = "api-gateway"
+def channel = '#prl-tech-notifications'
+
+withPipeline(type, product, component) {
+  //pipelineConf = config;
+  //loadVaultSecrets(secrets)
+  enableAksStagingDeployment()
+  enableSlackNotifications(channel)
+  disableLegacyDeployment()
+
+  after('checkout') {
+    echo 'prl-cos-api checked out'
+  }
 }
