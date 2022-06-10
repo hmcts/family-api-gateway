@@ -38,7 +38,7 @@ module "prl-courtnav-policy" {
   api_mgmt_rg   = local.api_mgmt_rg_cft
 
   api_name               = module.prl-courtnav-api.name
-  //api_policy_xml_content = data.template_file.refund_status_policy_template.rendered
+  api_policy_xml_content = data.template_file.refund_status_policy_template.rendered
 }
 
 data "azurerm_api_management" "courtnav" {
