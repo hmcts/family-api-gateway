@@ -4,7 +4,7 @@ import uk.gov.hmcts.contino.AppPipelineDsl
 @Library("Infrastructure")
 
 def type = "java"
-def product = "fis"
+def product = "family"
 def component = "api-gateway"
 def channel = '#prl-tech-notifications'
 
