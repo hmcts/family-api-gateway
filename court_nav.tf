@@ -34,8 +34,8 @@ data "template_file" "courtnav_policy_template" {
 module "prl-courtnav-policy" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
 
-  api_mgmt_name = local.api_mgmt_name_cft
-  api_mgmt_rg   = local.api_mgmt_rg_cft
+  api_mgmt_name = local.api_mgmt_name
+  api_mgmt_rg   = local.api_mgmt_rg
 
   api_name               = module.prl-courtnav-api.name
   api_policy_xml_content = data.template_file.refund_status_policy_template.rendered
