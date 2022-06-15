@@ -1,8 +1,8 @@
 module "prl-courtnav-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
-  api_mgmt_name = local.api_mgmt_name_cft
-  api_mgmt_rg   = local.api_mgmt_rg_cft
+  api_mgmt_name = local.api_mgmt_name
+  api_mgmt_rg   = local.api_mgmt_rg
   name = var.product_name
   product_access_control_groups = ["developers"]
 }
@@ -10,8 +10,8 @@ module "prl-courtnav-product" {
 module "prl-courtnav-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
-  api_mgmt_name = local.api_mgmt_name_cft
-  api_mgmt_rg   = local.api_mgmt_rg_cft
+  api_mgmt_name = local.api_mgmt_name
+  api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.prl-courtnav-product.product_id
@@ -43,7 +43,7 @@ module "prl-courtnav-policy" {
 
 data "azurerm_api_management" "courtnav" {
   name                = var.product_name
-  resource_group_name = local.api_mgmt_rg_cft
+  resource_group_name = local.api_mgmt_rg
 }
 
 data "azurerm_api_management_product" "courtnav" {
