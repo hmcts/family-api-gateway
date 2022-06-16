@@ -41,14 +41,3 @@ module "prl-courtnav-policy" {
   api_policy_xml_content = data.template_file.courtnav_policy_template.rendered
 }
 
-data "azurerm_api_management" "courtnav" {
-  name                = var.product_name
-  resource_group_name = local.api_mgmt_rg
-}
-
-data "azurerm_api_management_product" "courtnav" {
-  product_id          = module.prl-courtnav-product.product_id
-  api_management_name = data.azurerm_api_management.courtnav.name
-  resource_group_name = data.azurerm_api_management.courtnav.resource_group_name
-}
-
