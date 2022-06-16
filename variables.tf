@@ -1,6 +1,6 @@
 variable "product" {
   type = string
-  default = "fis"
+  default = "family"
 }
 
 variable "product_name" {
