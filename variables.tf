@@ -1,10 +1,11 @@
 variable "product" {
   type = string
+  default = "fis"
 }
 
 variable "product_name" {
   type    = string
-  default = "fis"
+  default = "family"
 }
 
 variable "location" {
