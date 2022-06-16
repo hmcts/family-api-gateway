@@ -5,7 +5,7 @@ variable "product" {
 
 variable "product_name" {
   type    = string
-  default = "api"
+  default = "cases"
 }
 
 variable "location" {
