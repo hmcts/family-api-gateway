@@ -1,3 +1,7 @@
+provider "azurerm" {
+  features {}
+}
+
 locals {
   api_mgmt_name     = join("-", ["cft-api-mgmt", var.env])
   api_mgmt_rg       = join("-", ["cft", var.env,"network-rg"])
