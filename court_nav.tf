@@ -5,6 +5,10 @@ module "prl-courtnav-product" {
   api_mgmt_rg   = local.api_mgmt_rg
   name = var.product_name
   product_access_control_groups = ["developers"]
+  
+  providers = {
+    azurerm = azurerm.cftappsdemo
+  }
 }
 
 module "prl-courtnav-api" {
