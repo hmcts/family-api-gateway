@@ -19,12 +19,10 @@ data "azurerm_key_vault" "fis_key_vault" {
 
 data "azurerm_key_vault_secret" "s2s_client_id" {
   name         = "gateway-s2s-client-id"
-  value         = "test-client-id"
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
 
 data "azurerm_key_vault_secret" "s2s_client_secret" {
   name         = "gateway-s2s-client-secret"
-  value         = "test"
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
