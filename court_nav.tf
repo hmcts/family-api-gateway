@@ -23,6 +23,10 @@ module "prl-courtnav-api" {
   display_name  = "Court Nav Api"
   path          = "prl-case-api"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/court_nav.json"
+  
+  providers = {
+    azurerm = azurerm.cftappsdemo
+  }
 }
 
 data "template_file" "courtnav_policy_template" {
@@ -43,5 +47,9 @@ module "prl-courtnav-policy" {
 
   api_name               = module.prl-courtnav-api.name
   api_policy_xml_content = data.template_file.courtnav_policy_template.rendered
+  
+  providers = {
+    azurerm = azurerm.cftappsdemo
+  }
 }
 
