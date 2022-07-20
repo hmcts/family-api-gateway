@@ -1,6 +1,6 @@
 @Library("Infrastructure") _
 
-withInfraPipeline('fis') {
+withInfraPipeline('familygw') {
     // Configure branches to sync with master branch
     def branchesToSync = ['demo', 'ithc', 'perftest']
 
