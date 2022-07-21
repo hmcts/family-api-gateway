@@ -53,3 +53,22 @@ module "prl-courtnav-policy" {
   }
 }
 
+data "azurerm_api_management_product" "courtNavApi" {
+  product_id          = module.ccpay-refund-lists-product.product_id
+  api_management_name = local.api_mgmt_name
+  resource_group_name = local.api_mgmt_rg
+
+  provider = azurerm.cftappsdemo
+}
+  
+resource "azurerm_api_management_subscription" "courtnav_subscription" {
+  api_management_name = local.api_mgmt_name
+  resource_group_name = local.api_mgmt_rg
+  user_id             = azurerm_api_management_user.courtnav_user.id
+  product_id          = data.azurerm_api_management_product.courtNavApi.id
+  display_name        = "Courtnav Subscription"
+  state               = "active"
+
+  provider = azurerm.cftappsdemo
+}
+
