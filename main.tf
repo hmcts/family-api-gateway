@@ -30,3 +30,26 @@ data "azurerm_key_vault_secret" "s2s_client_secret" {
   name         = "gateway-s2s-client-secret"
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
+
+resource "azurerm_api_management_user" "courtnav_user" {
+  api_management_name = local.api_mgmt_name
+  resource_group_name = local.api_mgmt_rg
+  user_id             = "5931a75ae4bbd512288c690e"
+  first_name          = "Shashi"
+  last_name           = "Kariyappa"
+  email               = "shashi.kariyappa@hmcts.net"
+  state               = "active"
+
+  provider = azurerm.cftappsdemo
+}
+
+resource "azurerm_api_management_subscription" "courtnav_subscription" {
+  api_management_name = local.api_mgmt_name
+  resource_group_name = local.api_mgmt_rg
+  user_id             = azurerm_api_management_user.courtnav_user.id
+  product_id          = data.azurerm_api_management_product.courtnav_user.id
+  display_name        = "Courtnav Subscription"
+  state               = "active"
+
+  provider = azurerm.cftappsdemo
+}
