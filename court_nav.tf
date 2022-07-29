@@ -72,7 +72,7 @@ resource "azurerm_api_management_subscription" "courtnav_subscription" {
   provider = azurerm.cftappsdemo
 }
 
-resource "azurerm_key_vault_secret" "subscription_key" {
+resource "azurerm_key_vault_secret" "case_creation_subscription_key" {
   name         = "courtnav-subscription-sub-key"
   value        = azurerm_api_management_subscription.courtnav_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id

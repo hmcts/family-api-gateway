@@ -72,7 +72,7 @@ resource "azurerm_api_management_subscription" "document_subscription" {
   provider = azurerm.cftappsdemo
 }
 
-resource "azurerm_key_vault_secret" "subscription_key" {
+resource "azurerm_key_vault_secret" "document_subscription_key" {
   name         = "document-subscription-sub-key"
   value        = azurerm_api_management_subscription.document_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
