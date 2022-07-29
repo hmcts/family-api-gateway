@@ -1,4 +1,4 @@
-module "prl-courtnav-product" {
+module "prl-document-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
@@ -11,16 +11,16 @@ module "prl-courtnav-product" {
   }
 }
 
-module "prl-courtnav-api" {
+module "prl-document-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.prl_api_url
-  product_id    = module.prl-courtnav-product.product_id
+  product_id    = module.prl-document-product.product_id
   name          = join("-", [var.product_name, "api"])
-  display_name  = "Case creation api"
+  display_name  = "Case document api"
   path          = "prl-case-api"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/court_nav.json"
   
@@ -29,7 +29,7 @@ module "prl-courtnav-api" {
   }
 }
 
-data "template_file" "courtnav_policy_template" {
+data "template_file" "document_policy_template" {
   template = file(join("", [path.module, "/template/api-policy.xml"]))
 
   vars = {
@@ -39,41 +39,41 @@ data "template_file" "courtnav_policy_template" {
   }
 }
 
-module "prl-courtnav-policy" {
+module "prl-document-policy" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
 
-  api_name               = module.prl-courtnav-api.name
-  api_policy_xml_content = data.template_file.courtnav_policy_template.rendered
+  api_name               = module.prl-document-api.name
+  api_policy_xml_content = data.template_file.document_policy_template.rendered
   
   providers = {
     azurerm = azurerm.cftappsdemo
   }
 }
 
-data "azurerm_api_management_product" "courtNavApi" {
-  product_id          = module.prl-courtnav-product.product_id
+data "azurerm_api_management_product" "documentApi" {
+  product_id          = module.prl-document-product.product_id
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
 
   provider = azurerm.cftappsdemo
 }
   
-resource "azurerm_api_management_subscription" "courtnav_subscription" {
+resource "azurerm_api_management_subscription" "document_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
   user_id             = azurerm_api_management_user.courtnav_user.id
-  product_id          = data.azurerm_api_management_product.courtNavApi.id
-  display_name        = "Courtnav Subscription"
+  product_id          = data.azurerm_api_management_product.documentApi.id
+  display_name        = "Document subscription"
   state               = "active"
 
   provider = azurerm.cftappsdemo
 }
 
 resource "azurerm_key_vault_secret" "subscription_key" {
-  name         = "courtnav-subscription-sub-key"
-  value        = azurerm_api_management_subscription.courtnav_subscription.primary_key
+  name         = "document-subscription-sub-key"
+  value        = azurerm_api_management_subscription.document_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
