@@ -24,6 +24,9 @@ module "prl-courtnav-api" {
   path          = "prl-case-api"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/court_nav.json"
   
+  depends_on = [
+    module.prl-courtnav-product
+  ]
   providers = {
     azurerm = azurerm.cftappsdemo
   }
