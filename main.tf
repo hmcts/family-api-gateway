@@ -1,6 +1,6 @@
 locals {
   api_mgmt_suffix   = var.apim_suffix == "" ? var.env : var.apim_suffix
-  api_mgmt_name     = join("-", ["cft-api-mgmt", api_mgmt_suffix])
+  api_mgmt_name     = "cft-api-mgmt-${local.api_mgmt_suffix}"
   api_mgmt_rg       = join("-", ["cft", var.env,"network-rg"])
   fis_key_vault = join("-", ["fis", var.env])
 
