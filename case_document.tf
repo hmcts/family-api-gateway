@@ -25,7 +25,7 @@ module "prl-document-api" {
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/court_nav.json"
   
   depends_on = [
-    local.api_mgmt_rg
+    module.prl-document-product
   ]
   providers = {
     azurerm = azurerm.cftappsdemo
