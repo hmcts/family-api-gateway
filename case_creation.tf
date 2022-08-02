@@ -46,7 +46,7 @@ module "prl-case-creation-policy" {
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
 
-  api_name               = module.api-mgmt-api.name
+  api_name               = module.case-mgmt-api.name
   api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
 
   providers     = {
