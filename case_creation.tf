@@ -1,4 +1,4 @@
-module "api-mgmt-product" {
+module "api-case-mgmt-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
@@ -12,14 +12,14 @@ module "api-mgmt-product" {
   }
 }
 
-module "api-mgmt-api" {
+module "case-mgmt-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.prl_api_url
-  product_id    = module.api-mgmt-product.product_id
+  product_id    = module.api-case-mgmt-product.product_id
   name          = join("-", [var.product_name, "api"])
   display_name  = "Case creation api"
   path          = "prl-case-api"
@@ -55,7 +55,7 @@ module "prl-case-creation-policy" {
 }
 
 data "azurerm_api_management_product" "caseCreationApi" {
-  product_id          = module.api-mgmt-product.product_id
+  product_id          = module.api-case-mgmt-product.product_id
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
 

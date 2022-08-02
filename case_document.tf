@@ -1,9 +1,9 @@
-module "api-mgmt-product" {
+module "document-mgmt-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
-  name = var.product_name
+  name = "documents"
   product_access_control_groups = ["developers"]
 
   providers     = {
@@ -11,14 +11,14 @@ module "api-mgmt-product" {
   }
 }
 
-module "api-mgmt-api" {
+module "document-mgmt-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.prl_api_url
-  product_id    = module.api-mgmt-product.product_id
+  product_id    = module.document-mgmt-product.product_id
   name          = join("-", [var.product_name, "api"])
   display_name  = "Case document api"
   path          = "prl-case-api"
@@ -45,7 +45,7 @@ module "prl-document-policy" {
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
 
-  api_name               = module.api-mgmt-api.name
+  api_name               = module.document-mgmt-api.name
   api_policy_xml_content = data.template_file.document_policy_template.rendered
 
   providers     = {
@@ -54,7 +54,7 @@ module "prl-document-policy" {
 }
 
 data "azurerm_api_management_product" "documentApi" {
-  product_id          = module.api-mgmt-product.product_id
+  product_id          = module.document-mgmt-product.product_id
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
 
