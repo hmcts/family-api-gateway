@@ -22,7 +22,7 @@ module "case-mgmt-api" {
   product_id    = module.api-case-mgmt-product.product_id
   name          = join("-", [var.product_name, "api"])
   display_name  = "Case creation api"
-  path          = "prl-case-api"
+  path          = "prl-cos-api"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/court_nav.json"
 
   providers     = {
