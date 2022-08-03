@@ -54,20 +54,18 @@ module "prl-case-creation-policy" {
   }
 }
 
-data "azurerm_api_management_product" "caseCreationApi" {
-  product_id          = module.api-case-mgmt-product.product_id
-  api_management_name = local.api_mgmt_name
-  resource_group_name = local.api_mgmt_rg
-
-}
   
 resource "azurerm_api_management_subscription" "case_creation_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
   user_id             = azurerm_api_management_user.case_creation_user.id
-  product_id          = data.azurerm_api_management_product.caseCreationApi.id
+  product_id          = module.api-case-mgmt-product.product_id
   display_name        = "Case Subscription"
   state               = "active"
+    
+  providers     = {
+    azurerm = azurerm.aks-cftapps
+  }
 
 }
 
