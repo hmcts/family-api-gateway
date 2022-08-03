@@ -39,5 +39,5 @@ resource "azurerm_api_management_user" "case_creation_user" {
   last_name           = "Kariyappa"
   email               = "shashi.kariyappa@hmcts.net"
   state               = "active"
-
+  provider            = azurerm.aks-cftapps
 }
