@@ -60,10 +60,7 @@ resource "azurerm_api_management_subscription" "document_subscription" {
   product_id          = module.document-mgmt-product.product_id
   display_name        = "Document subscription"
   state               = "active"
-  
-  providers     = {
-    azurerm = azurerm.aks-cftapps
-  }
+  provider            = azurerm.aks-cftapps
 
 }
 
