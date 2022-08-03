@@ -19,9 +19,9 @@ module "document-mgmt-api" {
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.document-mgmt-product.product_id
-  name          = join("-", [var.product_name, "api"])
+  name          = join("-", [var.document_product_name, "api"])
   display_name  = "Case document api"
-  path          = "prl-case-api"
+  path          = "prl-cos-api"
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/document_upload.json"
 
   providers     = {

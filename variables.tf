@@ -8,6 +8,11 @@ variable "product_name" {
   default = "case"
 }
 
+variable "document_product_name" {
+  type    = string
+  default = "document"
+}
+
 variable "location" {
   type    = string
   default = "UK South"
