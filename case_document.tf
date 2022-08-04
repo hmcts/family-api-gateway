@@ -22,7 +22,7 @@ module "document-mgmt-api" {
   name          = join("-", [var.document_product_name, "api"])
   display_name  = "Case document api"
   path          = "prl-document-api"
-  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/document_upload.json"
+  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/prl_document_upload.json"
 
   providers     = {
     azurerm = azurerm.aks-cftapps
