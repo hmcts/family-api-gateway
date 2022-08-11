@@ -23,6 +23,7 @@ module "case-mgmt-api" {
   name          = join("-", [var.product_name, "api"])
   display_name  = "Case creation api"
   path          = "prl-cos-api"
+  protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/case_creation.json"
 
   providers     = {
