@@ -6,7 +6,7 @@ module "api-case-mgmt-product" {
   name = var.product_name
   product_access_control_groups = ["developers"]
   approval_required     = "false"
-  subscription_required = "false"
+  subscription_required = "true"
   providers = {
     azurerm = azurerm.aks-cftapps
   }
