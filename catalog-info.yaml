@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "family-api-gateway"
+  annotations:
+    # This must match folder-name/job-name in Jenkins.
+    jenkins.io/job-full-name: cft:HMCTS_d_to_i/family-api-gateway
+    github.com/project-slug: hmcts/family-api-gateway
+  tags:
+    - terraform
+  links:
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=prl-tech-notifications
+      title: "#prl-tech-notifications on Slack"
+      icon: chat
+spec:
+  type: service
+  lifecycle: production
+  owner: dts_family_private_law
