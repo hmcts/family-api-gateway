@@ -1,4 +1,4 @@
-module "api-case-mgmt-product" {
+module "api-case-search-mgmt-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
@@ -12,14 +12,14 @@ module "api-case-mgmt-product" {
   }
 }
 
-module "case-mgmt-api" {
+module "case-search-mgmt-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.prl_api_url
-  product_id    = module.api-case-mgmt-product.product_id
+  product_id    = module.api-case-search-mgmt-product.product_id
   name          = join("-", [var.product_name, "api"])
   display_name  = "Search cases api"
   path          = "prl-cos-api"
@@ -41,13 +41,13 @@ data "template_file" "api_mgmt_policy_template" {
   }
 }
 
-module "prl-case-creation-policy" {
+module "prl-case-search-policy" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
 
-  api_name               = module.case-mgmt-api.name
+  api_name               = module.case-search-mgmt-api.name
   api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
 
   providers     = {
@@ -56,19 +56,19 @@ module "prl-case-creation-policy" {
 }
 
 
-resource "azurerm_api_management_subscription" "case_creation_subscription" {
+resource "azurerm_api_management_subscription" "case_search_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
   user_id             = azurerm_api_management_user.case_creation_user.id
-  product_id          = module.api-case-mgmt-product.id
+  product_id          = module.api-case-search-mgmt-product.id
   display_name        = "Case Subscription"
   state               = "active"
   provider            = azurerm.aks-cftapps
 
 }
 
-resource "azurerm_key_vault_secret" "case_creation_subscription_key" {
+resource "azurerm_key_vault_secret" "case_search_subscription_key" {
   name         = "courtnav-subscription-sub-key"
-  value        = azurerm_api_management_subscription.case_creation_subscription.primary_key
+  value        = azurerm_api_management_subscription.case_search_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }

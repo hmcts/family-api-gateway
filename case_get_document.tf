@@ -1,4 +1,4 @@
-module "document-mgmt-product" {
+module "case-document-mgmt-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
@@ -12,14 +12,14 @@ module "document-mgmt-product" {
   }
 }
 
-module "document-mgmt-api" {
+module "case-document-mgmt-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.prl_api_url
-  product_id    = module.document-mgmt-product.product_id
+  product_id    = module.case-document-mgmt-product.product_id
   name          = join("-", [var.document_product_name, "api"])
   display_name  = "get case document api"
   path          = "prl-cos-api"
@@ -41,13 +41,13 @@ data "template_file" "document_policy_template" {
   }
 }
 
-module "prl-document-policy" {
+module "prl-case-document-policy" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api-policy?ref=master"
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
 
-  api_name               = module.document-mgmt-api.name
+  api_name               = module.case-document-mgmt-api.name
   api_policy_xml_content = data.template_file.document_policy_template.rendered
 
   providers     = {
@@ -55,19 +55,19 @@ module "prl-document-policy" {
   }
 }
 
-resource "azurerm_api_management_subscription" "document_subscription" {
+resource "azurerm_api_management_subscription" "case_document_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
   user_id             = azurerm_api_management_user.case_creation_user.id
-  product_id          = module.document-mgmt-product.id
-  display_name        = "Document subscription"
+  product_id          = module.case-document-mgmt-product.id
+  display_name        = "Case Document subscription"
   state               = "active"
   provider            = azurerm.aks-cftapps
 
 }
 
-resource "azurerm_key_vault_secret" "document_subscription_key" {
-  name         = "document-subscription-sub-key"
-  value        = azurerm_api_management_subscription.document_subscription.primary_key
+resource "azurerm_key_vault_secret" "case_document_subscription_key" {
+  name         = "case-document-subscription-sub-key"
+  value        = azurerm_api_management_subscription.case_document_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
