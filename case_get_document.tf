@@ -24,7 +24,7 @@ module "case-document-mgmt-api" {
   display_name  = "get case document api"
   path          = "prl-cos-api"
   protocols     = ["http", "https"]
-  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/case-get-document.json"
+  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-get-document.json"
 
   providers     = {
     azurerm = azurerm.aks-cftapps

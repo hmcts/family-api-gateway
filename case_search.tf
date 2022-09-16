@@ -24,7 +24,7 @@ module "case-search-mgmt-api" {
   display_name  = "Search cases api"
   path          = "prl-cos-api"
   protocols     = ["http", "https"]
-  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/case-search.json"
+  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-search.json"
 
   providers     = {
     azurerm = azurerm.aks-cftapps
