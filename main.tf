@@ -2,7 +2,7 @@ locals {
   api_mgmt_suffix   = var.apim_suffix == "" ? var.env : var.apim_suffix
   api_mgmt_name     = "cft-api-mgmt-${local.api_mgmt_suffix}"
   api_mgmt_rg       = join("-", ["cft", var.env,"network-rg"])
-  fis_key_vault = join("-", ["fis", var.env])
+  fis_key_vault = join("-", ["fis-kv", var.env])
 
   prl_api_url = join("", ["http://prl-cos-", var.env, ".service.core-compute-", var.env, ".internal"])
   s2sUrl           = join("", ["http://rpe-service-auth-provider-", var.env, ".service.core-compute-", var.env, ".internal"])
