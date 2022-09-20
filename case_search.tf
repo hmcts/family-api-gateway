@@ -68,7 +68,7 @@ resource "azurerm_api_management_subscription" "case_search_subscription" {
 }
 
 resource "azurerm_key_vault_secret" "case_search_subscription_key" {
-  name         = "courtnav-subscription-sub-key"
+  name         = "cafcass-search-subscription-sub-key"
   value        = azurerm_api_management_subscription.case_search_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
