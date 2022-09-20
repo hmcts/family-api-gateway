@@ -31,7 +31,7 @@ module "case-search-mgmt-api" {
   }
 }
 
-data "template_file" "api_mgmt_policy_template" {
+data "template_file" "case_mgmt_policy_template" {
   template = file(join("", [path.module, "/template/api-policy.xml"]))
 
   vars = {
@@ -48,7 +48,7 @@ module "prl-case-search-policy" {
   api_mgmt_rg   = local.api_mgmt_rg
 
   api_name               = module.case-search-mgmt-api.name
-  api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
+  api_policy_xml_content = data.template_file.case_mgmt_policy_template.rendered
 
   providers     = {
     azurerm = azurerm.aks-cftapps
