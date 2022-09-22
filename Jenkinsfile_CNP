@@ -1,3 +1,4 @@
+#!groovy
 @Library("Infrastructure") _
 
 withInfraPipeline('familygw') {
