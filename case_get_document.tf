@@ -12,6 +12,7 @@ module "case-document-mgmt-product" {
   }
 }
 
+
 module "case-document-mgmt-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
