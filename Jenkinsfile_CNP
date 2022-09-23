@@ -1,4 +1,5 @@
 #!groovy
+//noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
 withInfraPipeline('familygw') {
