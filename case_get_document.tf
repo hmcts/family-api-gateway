@@ -3,7 +3,7 @@ module "case-document-mgmt-product" {
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
-  name = var.document_product_name
+  name = var.document_product_get_name
   product_access_control_groups = ["developers"]
   approval_required     = "false"
   subscription_required = "true"
@@ -21,7 +21,7 @@ module "case-document-mgmt-api" {
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.case-document-mgmt-product.product_id
-  name          = join("-", [var.document_product_name, "api"])
+  name          = join("-", [var.document_product_get_name, "api"])
   display_name  = "get case document api"
   path          = "prl-cos-api"
   protocols     = ["http", "https"]

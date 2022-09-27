@@ -13,6 +13,16 @@ variable "document_product_name" {
   default = "document"
 }
 
+variable "case_search_name" {
+  type    = string
+  default = "case-search"
+}
+
+variable "document_product_get_name" {
+  type    = string
+  default = "document-get"
+}
+
 variable "location" {
   type    = string
   default = "UK South"

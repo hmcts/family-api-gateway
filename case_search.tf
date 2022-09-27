@@ -3,7 +3,7 @@ module "api-case-search-mgmt-product" {
 
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
-  name = var.product_name
+  name = var.case_search_name
   product_access_control_groups = ["developers"]
   approval_required     = "false"
   subscription_required = "true"
@@ -20,7 +20,7 @@ module "case-search-mgmt-api" {
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.api-case-search-mgmt-product.product_id
-  name          = join("-", [var.product_name, "api"])
+  name          = join("-", [var.case_search_name, "api"])
   display_name  = "Search cases api"
   path          = "prl-cos-api"
   protocols     = ["http", "https"]
