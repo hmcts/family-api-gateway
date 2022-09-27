@@ -20,7 +20,7 @@ variable "case_search_name" {
 
 variable "document_product_get_name" {
   type    = string
-  default = "document-get"
+  default = "fis-document-get"
 }
 
 variable "location" {
