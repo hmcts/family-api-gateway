@@ -20,10 +20,10 @@ module "case-document-mgmt-api" {
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
   service_url   = local.prl_api_url
-  product_id    = module.api-case-search-mgmt-product.product_id
+  product_id    = module.case-document-mgmt-product.product_id
   name          = join("-", [var.document_product_get_name, "api"])
   display_name  = "get case document for family api"
-  path          = ""
+  path          = "cases"
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-get-document.json"
 
