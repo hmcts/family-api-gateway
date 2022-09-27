@@ -22,7 +22,7 @@ module "case-search-mgmt-api" {
   product_id    = module.api-case-search-mgmt-product.product_id
   name          = join("-", [var.case_search_name, "api"])
   display_name  = "Search cases api"
-  path          = "prl-cos-api"
+  path          = ""
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-search.json"
 
