@@ -6,7 +6,6 @@ locals {
   fis_key_vault_rg = join("-", ["fis", var.env])
 
   prl_api_url = join("", ["http://prl-cos-", var.env, ".service.core-compute-", var.env, ".internal"])
-  prl_api_url_pr = "https://prl-cos-pr-568.service.core-compute-preview.internal"
   s2sUrl           = join("", ["http://rpe-service-auth-provider-", var.env, ".service.core-compute-", var.env, ".internal"])
 
 }

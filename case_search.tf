@@ -18,7 +18,7 @@ module "case-search-mgmt-api" {
   api_mgmt_name = local.api_mgmt_name
   api_mgmt_rg   = local.api_mgmt_rg
   revision      = "1"
-  service_url   = local.prl_api_url_pr
+  service_url   = local.prl_api_url
   product_id    = module.api-case-search-mgmt-product.product_id
   name          = join("-", [var.case_search_name, "api"])
   display_name  = "Search cases for family api"
