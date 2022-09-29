@@ -12,6 +12,7 @@ module "api-case-search-mgmt-product" {
   }
 }
 
+
 module "case-search-mgmt-api" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-api?ref=master"
 
@@ -22,7 +23,7 @@ module "case-search-mgmt-api" {
   product_id    = module.api-case-search-mgmt-product.product_id
   name          = join("-", [var.case_search_name, "api"])
   display_name  = "Search cases for family api"
-  path          = ""
+  path          = "family-api"
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-search.json"
 
