@@ -72,3 +72,4 @@ resource "azurerm_key_vault_secret" "case_document_subscription_key" {
   value        = azurerm_api_management_subscription.case_document_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
+
