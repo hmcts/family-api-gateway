@@ -77,7 +77,7 @@ resource "azurerm_api_management_subscription" "cafcass_document_subscription" {
   resource_group_name = local.api_mgmt_rg
   user_id             = azurerm_api_management_user.case_creation_user.id
   product_id          = module.document-mgmt-product.id
-  display_name        = "Document subscription"
+  display_name        = "Cafcass Document subscription"
   state               = "active"
   provider            = azurerm.aks-cftapps
 
