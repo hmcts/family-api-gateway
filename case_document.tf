@@ -71,3 +71,20 @@ resource "azurerm_key_vault_secret" "document_subscription_key" {
   value        = azurerm_api_management_subscription.document_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
+
+resource "azurerm_api_management_subscription" "cafcass_document_subscription" {
+  api_management_name = local.api_mgmt_name
+  resource_group_name = local.api_mgmt_rg
+  user_id             = azurerm_api_management_user.case_creation_user.id
+  product_id          = module.document-mgmt-product.id
+  display_name        = "Cafcass Document subscription"
+  state               = "active"
+  provider            = azurerm.aks-cftapps
+
+}
+
+resource "azurerm_key_vault_secret" "cafcass_document_subscription_key" {
+  name         = "cafcass-document-subscription-sub-key"
+  value        = azurerm_api_management_subscription.cafcass_document_subscription.primary_key
+  key_vault_id = data.azurerm_key_vault.fis_key_vault.id
+}
