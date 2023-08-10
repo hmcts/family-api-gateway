@@ -31,14 +31,3 @@ data "azurerm_key_vault_secret" "s2s_client_secret" {
   name         = "gateway-s2s-client-secret"
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
-  
-resource "azurerm_api_management_user" "case_creation_user" {
-  api_management_name = local.api_mgmt_name
-  resource_group_name = local.api_mgmt_rg
-  user_id             = "5931a75ae4bbd512288c690e"
-  first_name          = "Shashi"
-  last_name           = "Kariyappa"
-  email               = "shashi.kariyappa@hmcts.net"
-  state               = "active"
-  provider            = azurerm.aks-cftapps
-}
