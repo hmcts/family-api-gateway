@@ -22,10 +22,6 @@ module "case-mgmt-api" {
   path          = "prl-cos-api"
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/case_creation.json"
-
-  providers     = {
-    azurerm = azurerm.aks-cftapps
-  }
 }
 
 data "template_file" "api_mgmt_policy_template" {
@@ -46,10 +42,6 @@ module "prl-case-creation-policy" {
 
   api_name               = module.case-mgmt-api.name
   api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
-
-  providers     = {
-    azurerm = azurerm.aks-cftapps
-  }
 }
 
   
