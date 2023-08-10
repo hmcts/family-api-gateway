@@ -7,9 +7,6 @@ module "case-document-mgmt-product" {
   product_access_control_groups = ["developers"]
   approval_required     = "false"
   subscription_required = "true"
-  providers     = {
-    azurerm = azurerm.aks-cftapps
-  }
 }
 
 
@@ -27,9 +24,6 @@ module "case-document-mgmt-api" {
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-get-documents.json"
 
-  providers     = {
-    azurerm = azurerm.aks-cftapps
-  }
 }
 
 data "template_file" "case_document_policy_template" {
@@ -51,9 +45,6 @@ module "prl-case-document-policy" {
   api_name               = module.case-document-mgmt-api.name
   api_policy_xml_content = data.template_file.case_document_policy_template.rendered
 
-  providers     = {
-    azurerm = azurerm.aks-cftapps
-  }
 }
 
 resource "azurerm_api_management_subscription" "case_document_subscription" {
