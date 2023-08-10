@@ -59,7 +59,6 @@ module "prl-case-document-policy" {
 resource "azurerm_api_management_subscription" "case_document_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
-  user_id             = azurerm_api_management_user.case_creation_user.id
   product_id          = module.case-document-mgmt-product.id
   display_name        = "Case Document subscription"
   state               = "active"

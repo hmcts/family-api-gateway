@@ -58,7 +58,6 @@ module "prl-document-policy" {
 resource "azurerm_api_management_subscription" "document_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
-  user_id             = azurerm_api_management_user.case_creation_user.id
   product_id          = module.document-mgmt-product.id
   display_name        = "Document subscription"
   state               = "active"
@@ -75,7 +74,6 @@ resource "azurerm_key_vault_secret" "document_subscription_key" {
 resource "azurerm_api_management_subscription" "cafcass_document_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
-  user_id             = azurerm_api_management_user.case_creation_user.id
   product_id          = module.document-mgmt-product.id
   display_name        = "Cafcass Document subscription"
   state               = "active"

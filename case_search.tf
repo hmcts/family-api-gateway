@@ -60,7 +60,6 @@ module "prl-case-search-policy" {
 resource "azurerm_api_management_subscription" "case_search_subscription" {
   api_management_name = local.api_mgmt_name
   resource_group_name = local.api_mgmt_rg
-  user_id             = azurerm_api_management_user.case_creation_user.id
   product_id          = module.api-case-search-mgmt-product.id
   display_name        = "Case Subscription"
   state               = "active"
