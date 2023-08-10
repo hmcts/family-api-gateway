@@ -22,7 +22,6 @@ module "document-mgmt-api" {
   path          = "prl-document-api"
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/prl_document_upload.json"
-  api_type      = "http"
 }
 
 data "template_file" "document_policy_template" {
