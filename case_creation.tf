@@ -25,7 +25,7 @@ module "case-mgmt-api" {
 }
 
 data "template_file" "api_mgmt_policy_template" {
-  template = file(join("", [path.module, "/template/api-policy.xml"]))
+  template = file("${path.module}/template/api-policy.xml")
 
   vars = {
     s2s_client_id                   = data.azurerm_key_vault_secret.s2s_client_id.value
