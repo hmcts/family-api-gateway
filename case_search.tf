@@ -23,7 +23,7 @@ module "case-search-mgmt-api" {
   display_name  = "Search cases for family api"
   path          = "family-api"
   protocols     = ["https"]
-  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-search.json"
+  swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-search-cases.json"
 
 }
 
