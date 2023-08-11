@@ -1,10 +1,26 @@
 variable "product" {
   type = string
+  default = "family"
 }
 
 variable "product_name" {
   type    = string
-  default = "fis"
+  default = "case"
+}
+
+variable "document_product_name" {
+  type    = string
+  default = "document"
+}
+
+variable "case_search_name" {
+  type    = string
+  default = "case-search"
+}
+
+variable "document_product_get_name" {
+  type    = string
+  default = "fis-document-get"
 }
 
 variable "location" {
@@ -34,4 +50,11 @@ variable "api_gateway_test_certificate_thumbprints" {
 
 variable "common_tags" {
   type = map(string)
+}
+
+variable "aks_subscription_id" {
+}
+
+variable "apim_suffix" {
+  default = ""
 }
