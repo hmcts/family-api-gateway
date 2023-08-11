@@ -50,8 +50,6 @@ resource "azurerm_api_management_subscription" "document_subscription" {
   product_id          = module.document-mgmt-product.id
   display_name        = "Document subscription"
   state               = "active"
-  provider            = azurerm.aks-cftapps
-
 }
 
 resource "azurerm_key_vault_secret" "document_subscription_key" {
@@ -66,8 +64,6 @@ resource "azurerm_api_management_subscription" "cafcass_document_subscription" {
   product_id          = module.document-mgmt-product.id
   display_name        = "Cafcass Document subscription"
   state               = "active"
-  provider            = azurerm.aks-cftapps
-
 }
 
 resource "azurerm_key_vault_secret" "cafcass_document_subscription_key" {

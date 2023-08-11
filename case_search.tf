@@ -55,8 +55,6 @@ resource "azurerm_api_management_subscription" "case_search_subscription" {
   product_id          = module.api-case-search-mgmt-product.id
   display_name        = "Case Subscription"
   state               = "active"
-  provider            = azurerm.aks-cftapps
-
 }
 
 resource "azurerm_key_vault_secret" "case_search_subscription_key" {
