@@ -17,7 +17,7 @@ module "document-mgmt-api" {
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.document-mgmt-product.product_id
-  name          = join("-", [var.document_product_name, "api"])
+  name          = "${var.document_product_name}-api"
   display_name  = "Case document api"
   path          = "prl-document-api"
   protocols     = ["http", "https"]
