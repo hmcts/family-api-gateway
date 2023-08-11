@@ -18,7 +18,7 @@ module "case-document-mgmt-api" {
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.case-document-mgmt-product.product_id
-  name          = join("-", [var.document_product_get_name, "api"])
+  name          = "${var.document_product_get_name}-api"
   display_name  = "get case document for family api"
   path          = "family-document-api"
   protocols     = ["http", "https"]
