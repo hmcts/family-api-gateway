@@ -21,7 +21,7 @@ module "case-document-mgmt-api" {
   name          = "${var.document_product_get_name}-api"
   display_name  = "get case document for family api"
   path          = "family-document-api"
-  protocols     = ["http", "https"]
+  protocols     = ["https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-case-get-documents.json"
 
 }
