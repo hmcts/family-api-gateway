@@ -19,7 +19,7 @@ module "case-search-mgmt-api" {
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.api-case-search-mgmt-product.product_id
-  name          = join("-", [var.case_search_name, "api"])
+  name          = "${var.case_search_name}-api"
   display_name  = "Search cases for family api"
   path          = "family-api"
   protocols     = ["http", "https"]
