@@ -17,7 +17,7 @@ module "case-mgmt-api" {
   revision      = "1"
   service_url   = local.prl_api_url
   product_id    = module.api-case-mgmt-product.product_id
-  name          = "${product_name}-api"
+  name          = "${var.product_name}-api"
   display_name  = "Case creation api"
   path          = "prl-cos-api"
   protocols     = ["http", "https"]
