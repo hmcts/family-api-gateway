@@ -7,6 +7,9 @@ module "api-case-mgmt-product" {
   product_access_control_groups = ["developers"]
   approval_required     = "false"
   subscription_required = "true"
+  providers = {
+    azurerm = azurerm.aks-cftapps
+  }
 }
 
 module "case-mgmt-api" {
@@ -22,6 +25,10 @@ module "case-mgmt-api" {
   path          = "prl-cos-api"
   protocols     = ["https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/case_creation.json"
+
+  providers     = {
+    azurerm = azurerm.aks-cftapps
+  }
 }
 
 data "template_file" "api_mgmt_policy_template" {
@@ -42,6 +49,10 @@ module "prl-case-creation-policy" {
 
   api_name               = module.case-mgmt-api.name
   api_policy_xml_content = data.template_file.api_mgmt_policy_template.rendered
+
+  providers     = {
+    azurerm = azurerm.aks-cftapps
+  }
 }
 
   

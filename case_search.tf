@@ -7,7 +7,9 @@ module "api-case-search-mgmt-product" {
   product_access_control_groups = ["developers"]
   approval_required     = "false"
   subscription_required = "true"
-
+  providers = {
+    azurerm = azurerm.aks-cftapps
+  }
 }
 
 
@@ -25,6 +27,9 @@ module "case-search-mgmt-api" {
   protocols     = ["https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/cafcass-search-cases.json"
 
+  providers     = {
+    azurerm = azurerm.aks-cftapps
+  }
 }
 
 data "template_file" "case_mgmt_policy_template" {
@@ -46,6 +51,9 @@ module "prl-case-search-policy" {
   api_name               = module.case-search-mgmt-api.name
   api_policy_xml_content = data.template_file.case_mgmt_policy_template.rendered
 
+  providers     = {
+    azurerm = azurerm.aks-cftapps
+  }
 }
 
 
