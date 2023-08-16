@@ -62,6 +62,7 @@ resource "azurerm_api_management_subscription" "case_creation_subscription" {
   product_id          = module.api-case-mgmt-product.id
   display_name        = "Case Subscription"
   state               = "active"
+  provider            = azurerm.aks-cftapps
 
 }
 
