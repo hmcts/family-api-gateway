@@ -24,7 +24,7 @@ module "case-search-mgmt-api" {
   name          = "${var.case_search_name}-api"
   display_name  = "Search cases for family api"
   path          = "family-api"
-  protocols     = ["https"]
+  protocols     = ["http(s)"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/swagger-version-upgrade/docs/specs/cafcass-search-cases.json"
 
   providers     = {
