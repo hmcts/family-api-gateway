@@ -1,12 +1,12 @@
 module "api-case-search-mgmt-product" {
   source = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
 
-  api_mgmt_name = local.api_mgmt_name
-  api_mgmt_rg   = local.api_mgmt_rg
-  name = var.case_search_name
+  api_mgmt_name                 = local.api_mgmt_name
+  api_mgmt_rg                   = local.api_mgmt_rg
+  name                          = var.case_search_name
   product_access_control_groups = ["developers"]
-  approval_required     = "false"
-  subscription_required = "true"
+  approval_required             = "false"
+  subscription_required         = "true"
   providers = {
     azurerm = azurerm.aks-cftapps
   }
@@ -27,7 +27,7 @@ module "case-search-mgmt-api" {
   protocols     = ["http", "https"]
   swagger_url   = "https://raw.githubusercontent.com/hmcts/reform-api-docs/swagger-version-upgrade/docs/specs/cafcass-search-cases.json"
 
-  providers     = {
+  providers = {
     azurerm = azurerm.aks-cftapps
   }
 }
@@ -36,9 +36,9 @@ data "template_file" "case_mgmt_policy_template" {
   template = file("${path.module}/template/api-policy.xml")
 
   vars = {
-    s2s_client_id                   = data.azurerm_key_vault_secret.s2s_client_id.value
-    s2s_client_secret               = data.azurerm_key_vault_secret.s2s_client_secret.value
-    s2s_base_url                    = local.s2sUrl
+    s2s_client_id     = data.azurerm_key_vault_secret.s2s_client_id.value
+    s2s_client_secret = data.azurerm_key_vault_secret.s2s_client_secret.value
+    s2s_base_url      = local.s2sUrl
   }
 }
 
@@ -51,7 +51,7 @@ module "prl-case-search-policy" {
   api_name               = module.case-search-mgmt-api.name
   api_policy_xml_content = data.template_file.case_mgmt_policy_template.rendered
 
-  providers     = {
+  providers = {
     azurerm = azurerm.aks-cftapps
   }
 }
