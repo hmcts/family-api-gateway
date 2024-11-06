@@ -4,6 +4,17 @@
     </backend>
     <inbound>
         <base/>
+        <choose>
+            <when condition="@(context.Operation.Id == "get-case-data")">
+                <rate-limit-by-key calls="5" renewal-period="60" counter-key="get-case-data" />
+            </when>
+            <when condition="@(context.Operation.Id == "get-case-document")">
+                <rate-limit-by-key calls="20" renewal-period="60" counter-key="get-case-document" />
+            </when>
+            <when condition="@(context.Operation.Id == "documentUpload")">
+                <rate-limit-by-key calls="5" renewal-period="60" counter-key="documentUpload" />
+            </when>
+        </choose>
         <!-- generate totp -->
         <set-variable name="client_id" value="${s2s_client_id}" />
         <set-variable name="client_secret" value="${s2s_client_secret}" />
