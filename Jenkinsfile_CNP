@@ -4,7 +4,7 @@
 
 withInfraPipeline('familygw') {
     // Configure branches to sync with master branch
-    def branchesToSync = ['ithc', 'perftest']
+    def branchesToSync = ['ithc', 'perftest', 'demo']
 
     // Sync demo and perftest with master branch
     syncBranchesWithMaster(branchesToSync)
