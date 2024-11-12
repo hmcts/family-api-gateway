@@ -3,14 +3,14 @@ data "azurerm_subscription" "current" {}
 
 import {
   for_each = var.env == "demo" ? toset(["import"]) : toset([])
-  to = module.api-case-mgmt-product.azurerm_api_management_product.product
-  id = "/subscriptions/d025fece-ce99-4df2-b7a9-b649d3ff2060/resourceGroups/cft-demo-network-rg/providers/Microsoft.ApiManagement/service/cft-api-mgmt-demo/products/case"
+  to       = module.api-case-mgmt-product.azurerm_api_management_product.product
+  id       = "/subscriptions/d025fece-ce99-4df2-b7a9-b649d3ff2060/resourceGroups/cft-demo-network-rg/providers/Microsoft.ApiManagement/service/cft-api-mgmt-demo/products/case"
 }
 
 import {
   for_each = var.env == "demo" ? toset(["import"]) : toset([])
-  to = module.api-case-search-mgmt-product.azurerm_api_management_product.product
-  id = "/subscriptions/d025fece-ce99-4df2-b7a9-b649d3ff2060/resourceGroups/cft-demo-network-rg/providers/Microsoft.ApiManagement/service/cft-api-mgmt-demo/products/case-search"
+  to       = module.api-case-search-mgmt-product.azurerm_api_management_product.product
+  id       = "/subscriptions/d025fece-ce99-4df2-b7a9-b649d3ff2060/resourceGroups/cft-demo-network-rg/providers/Microsoft.ApiManagement/service/cft-api-mgmt-demo/products/case-search"
 }
 
 import {
