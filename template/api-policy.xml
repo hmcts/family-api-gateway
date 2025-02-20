@@ -14,9 +14,6 @@
             <when condition="@(context.Operation.Id == "documentUpload")">
                 <rate-limit-by-key calls="100" renewal-period="60" counter-key="documentUpload" />
             </when>
-            <when condition="@(context.Operation.Id == "documentUpload")">
-                <rate-limit-by-key calls="100" renewal-period="60" counter-key="documentUpload" />
-            </when>
             <when condition="@(context.Operation.Id == "caseCreation")">
                 <rate-limit-by-key calls="16" renewal-period="60" counter-key="caseCreation" />
             </when>
