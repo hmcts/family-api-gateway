@@ -86,3 +86,34 @@ resource "azurerm_key_vault_secret" "cafcass_document_subscription_key" {
   value        = azurerm_api_management_subscription.cafcass_document_subscription.primary_key
   key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
+
+
+# Configure Application insights logging for API
+# Terraform doesn't currently provide an azurerm_api_management_logger data source, so instead of using
+# the value of an output variable for the api_management_logger_id parameter it has to be set explicitly.
+resource "azurerm_api_management_api_diagnostic" "api_mgmt_api_diagnostic" {
+  identifier               = "applicationinsights"
+  api_management_logger_id = "/subscriptions/${var.aks_subscription_id}/resourceGroups/${local.api_mgmt_rg}/providers/Microsoft.ApiManagement/service/${local.api_mgmt_name}/loggers/${local.api_mgmt_logger_name}"
+  api_management_name      = local.api_mgmt_name
+  api_name                 = module.document-mgmt-api.name
+  resource_group_name      = local.api_mgmt_rg
+
+  sampling_percentage       = 100.0
+  always_log_errors         = true
+  log_client_ip             = true
+  verbosity                 = "verbose"
+  http_correlation_protocol = "W3C"
+
+  frontend_request {
+    body_bytes = 8192
+    headers_to_log = [
+      "content-type",
+      "content-length",
+      "origin"
+    ]
+  }
+
+  frontend_response {
+    body_bytes = 8192
+  }
+}
